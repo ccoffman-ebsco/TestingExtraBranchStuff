@@ -25,7 +25,7 @@ jobs:
         with:
           source-directory: 'output'
           destination-github-username: 'ccoffman-ebsco'
-          destination-repository-name: 'https://github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next'
+          destination-repository-name: 'TestingExtraBranchStuff-Next'
           user-email: ccoffman@ebsco.com
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-branch: someNewBranch
