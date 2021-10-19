@@ -13,18 +13,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  create_branch:
-    # The type of runner that the job will run on
+  createbranch:
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: generate branch name
-        run: echo name=ENET-Merge--$(date +%s) >> $GITHUB_ENV
-      - uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2     
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
         with:
-          repo: https://github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next
-          branch: ${{ env.name }}
+          source-directory: 'output'
+          destination-github-username: 'ccoffman-ebsco'
+          destination-repository-name: 'https://github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next'
+          user-email: ccoffman@ebsco.com
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: someNewBranch
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
