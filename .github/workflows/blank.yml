@@ -27,7 +27,7 @@ jobs:
       - name: Checkout Enext
         uses: actions/checkout@v2
         with:
-          repository: ccoffman-ebsco/TestingExtraBranchStuffNext@main
+          repository: ccoffman-ebsco/TestingExtraBranchStuff-Next@main
           path: next
       - run: |
           cd next
