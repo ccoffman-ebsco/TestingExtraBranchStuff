@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: generate unique branch name
         run: echo branchName=EnetMerge--$(date +%s) >> $GITHUB_ENV
-      - env:
+        env:
          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
       - name: Checkout
         uses: actions/checkout@v2
