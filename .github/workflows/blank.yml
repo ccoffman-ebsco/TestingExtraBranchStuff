@@ -16,18 +16,20 @@ jobs:
   createbranch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2     
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: generate unique branch name
+        run: echo branchName=EnetMerge--$(date +%s) >> $GITHUB_ENV
+      - env:
+         GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          source-directory: 'output'
-          destination-github-username: 'ccoffman-ebsco'
-          destination-repository-name: 'TestingExtraBranchStuff-Next'
-          user-email: ccoffman@ebsco.com
-          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-          target-branch: main
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
+          path: main
+      - name: Checkout tools repo
+        uses: actions/checkout@v2
+        with:
+          repository: ccoffman-ebsco/TestingExtraBranchStuffNext
+          path: next
+      - run: |
+          cd next
+          git branch ${{ env.branchName }}
+          
