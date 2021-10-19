@@ -20,14 +20,14 @@ jobs:
         run: echo branchName=EnetMerge--$(date +%s) >> $GITHUB_ENV
         env:
          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: Checkout
+      - name: Checkout Enet
         uses: actions/checkout@v2
         with:
           path: main
-      - name: Checkout tools repo
+      - name: Checkout Enext
         uses: actions/checkout@v2
         with:
-          repository: ccoffman-ebsco/TestingExtraBranchStuffNext
+          repository: ccoffman-ebsco/TestingExtraBranchStuffNext@main
           path: next
       - run: |
           cd next
