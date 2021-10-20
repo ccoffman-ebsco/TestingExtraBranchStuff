@@ -30,8 +30,6 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
           path: next
       - name: Copy repos
-        env:
-          GIT_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
           cd next
           git checkout -b ${{ env.branchName }}
