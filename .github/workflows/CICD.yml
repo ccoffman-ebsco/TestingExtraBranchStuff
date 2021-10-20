@@ -39,6 +39,7 @@ jobs:
           rsync -a --exclude 'dontPushToOtherRepo' ../enet/* ./
           git add -A
           git commit -a -m "This is the PR merge commit message: ${{github.event.commits[0].message}}"
+          echo ${{github.event.commits[0].url}}
           git push --set-upstream origin ${{ env.branchName }}
           echo "${{ secrets.API_TOKEN_GITHUB }}" > token.txt
           gh auth login --with-token < token.txt
