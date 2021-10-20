@@ -29,18 +29,23 @@ jobs:
           ref: main
           token: ${{ secrets.API_TOKEN_GITHUB }}
           path: next
-      - name: Copy repos
+      - name: Setup Git Creds
         run: |
-          cd next
           git config --global user.email "ccoffman-ebsco@ebsco.com"
           git config --global user.name "ccoffman-ebsco"
+          cd next
+      - name: Make New Branch in Enext
+        run: |
           git remote set-url origin https://ccoffman-ebsco:${{ secrets.API_TOKEN_GITHUB }}@github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next.git
           git checkout -b ${{ env.branchName }}
+      - name: Copy Enet into Enext
+        run: |
           rsync -a --exclude 'dontPushToOtherRepo' ../enet/* ./
           git add -A
+      - name: Commit and Push
+        run: |
           git commit -a -m "This is the PR merge commit message: ${{github.event.commits[0].message}}"
-          echo ${{github.event.commits[0].url}}
           git push --set-upstream origin ${{ env.branchName }}
           echo "${{ secrets.API_TOKEN_GITHUB }}" > token.txt
           gh auth login --with-token < token.txt
-          gh pr create --title "Merging branch ${{ env.branchName }}" --body "This merge was created from the this PR in ENET: ${{ github.event.pull_request.number }}" --base main
+          gh pr create --title "Merging branch ${{ env.branchName }}" --body "This merge was created from [This Commit](${{ github.event.head_commit.url }})" --base main
