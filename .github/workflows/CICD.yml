@@ -40,4 +40,5 @@ jobs:
           git add -A
           git commit -a -m 'This is a message'
           git push --set-upstream origin ${{ env.branchName }}
+          gh auth login --with-token ${{ secrets.API_TOKEN_GITHUB }}
           gh pr create --title "Lasted Merge" --body "This merge was created from the last PR in Enet"
