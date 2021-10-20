@@ -31,5 +31,5 @@ jobs:
           path: next
       - run: |
           cd next
-          git branch ${{ env.branchName }}
+          git checkout -b ${{ env.branchName }}
           git push
