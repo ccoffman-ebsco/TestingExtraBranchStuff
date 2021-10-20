@@ -36,7 +36,7 @@ jobs:
           git config --global user.name "ccoffman-ebsco"
           git remote set-url origin https://ccoffman-ebsco:${{ secrets.API_TOKEN_GITHUB }}@github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next.git
           git checkout -b ${{ env.branchName }}
-          rsync -a --exclude ../enet/dontPushToOtherRepo ../enet/* ./
+          rsync -a --exclude 'dontPushToOtherRepo' ../enet/* ./
           git add -A
           git commit -a -m "This is the PR merge commit message: ${{github.event.commits[0].message}}"
           git push --set-upstream origin ${{ env.branchName }}
