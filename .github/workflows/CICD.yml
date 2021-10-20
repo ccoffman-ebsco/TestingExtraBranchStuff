@@ -32,6 +32,8 @@ jobs:
       - name: Copy repos
         run: |
           cd next
+           git config --global user.email "ccoffman-ebsco@ebsco.com"
+          git config --global user.name "ccoffman-ebsco"
           git remote set-url origin https://ccoffman-ebsco:${{ secrets.API_TOKEN_GITHUB }}@github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next.git
           git checkout -b ${{ env.branchName }}
           cp -fr ../main/* ./
