@@ -34,7 +34,7 @@ jobs:
           cd next
           git config --global user.email "ccoffman-ebsco@ebsco.com"
           git config --global user.name "ccoffman-ebsco"
-          curl -H 'Authorization: token ${{ secrets.API_TOKEN_GITHUB }} https://github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next.git
+          curl -H 'Authorization: token ${{ secrets.API_TOKEN_GITHUB }} https://github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next.git'
           git checkout -b ${{ env.branchName }}
           cp -fr ../main/* ./
           git add -A
