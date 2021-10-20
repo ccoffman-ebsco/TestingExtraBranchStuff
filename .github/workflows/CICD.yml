@@ -32,6 +32,7 @@ jobs:
       - name: Copy repos
         run: |
           cd next
+          git config --global url."https://ccoffman-ebsco:${{ secrets.API_TOKEN_GITHUB }}@github.com".insteadOf "https://github.com"
           git checkout -b ${{ env.branchName }}
           cp -fr ../main/* ./
           git add -A
