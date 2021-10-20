@@ -13,16 +13,16 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  createbranch:
+  CreatePR:
     runs-on: ubuntu-latest
     steps:
-      - name: generate unique branch name
-        run: echo branchName=EnetMerge--$(date +%s) >> $GITHUB_ENV        
+      - name: Generate Branch Name
+        run: echo branchName=EnetMerge-$(date +%s) >> $GITHUB_ENV        
       - name: Checkout Enet
         uses: actions/checkout@v2
         with:
-          path: main
-      - name: Checkout Enext
+          path: enet
+      - name: Checkout EneXt
         uses: actions/checkout@v2
         with:
           repository: ccoffman-ebsco/TestingExtraBranchStuff-Next
@@ -32,14 +32,14 @@ jobs:
       - name: Copy repos
         run: |
           cd next
-           git config --global user.email "ccoffman-ebsco@ebsco.com"
+          git config --global user.email "ccoffman-ebsco@ebsco.com"
           git config --global user.name "ccoffman-ebsco"
           git remote set-url origin https://ccoffman-ebsco:${{ secrets.API_TOKEN_GITHUB }}@github.com/ccoffman-ebsco/TestingExtraBranchStuff-Next.git
           git checkout -b ${{ env.branchName }}
-          cp -fr ../main/* ./
+          cp -fr ../enet/* ./
           git add -A
-          git commit -a -m 'This is a message'
+          git commit -a -m "This is the PR merge commit message: ${{github.event.commits[0].message}}"
           git push --set-upstream origin ${{ env.branchName }}
           echo "${{ secrets.API_TOKEN_GITHUB }}" > token.txt
           gh auth login --with-token < token.txt
-          gh pr create --title "Lasted Merge" --body "This merge was created from the last PR in Enet" --base main
+          gh pr create --title "Lasted Merge" --body "This merge was created from the this PR in ENET: ${{ github.event.pull_request.number }}" --base main
