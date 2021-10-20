@@ -17,14 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: generate unique branch name
-        run: echo branchName=EnetMerge--$(date +%s) >> $GITHUB_ENV
-        env:
-         GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+        run: echo branchName=EnetMerge--$(date +%s) >> $GITHUB_ENV        
       - name: Checkout Enet
         uses: actions/checkout@v2
         with:
           path: main
       - name: Checkout Enext
+        env:
+           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         uses: actions/checkout@v2
         with:
           repository: ccoffman-ebsco/TestingExtraBranchStuff-Next
