@@ -29,7 +29,11 @@ jobs:
           ref: main
           token: ${{ secrets.API_TOKEN_GITHUB }}
           path: next
-      - run: |
+      - name: Copy repos
+        env:
+          GIT_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+        run: |
+          git config --global url."https://${ccoffman-ebsco}:${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}@github.com".insteadOf "https://github.com"
           cd next
           git checkout -b ${{ env.branchName }}
           cp -fr ../main/* ./
