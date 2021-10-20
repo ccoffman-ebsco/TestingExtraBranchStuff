@@ -31,6 +31,7 @@ jobs:
           repository: ccoffman-ebsco/TestingExtraBranchStuff-Next
           ref: main
           token: ${{ secrets.API_TOKEN_GITHUB }}
+          persist-credentials: false
           path: next
       - name: Copy repos
         run: |
