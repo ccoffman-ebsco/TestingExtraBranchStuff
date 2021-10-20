@@ -33,7 +33,8 @@ jobs:
         env:
           GIT_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
-          git config --global url."https://${ccoffman-ebsco}:${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}@github.com".insteadOf "https://github.com"
+          git config --global --unset-all
+          git config --global --add url."git@github.com:".insteadOf "https://github.com/"
           cd next
           git checkout -b ${{ env.branchName }}
           cp -fr ../main/* ./
