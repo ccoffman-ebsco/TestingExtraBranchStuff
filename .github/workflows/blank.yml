@@ -23,12 +23,11 @@ jobs:
         with:
           path: main
       - name: Checkout Enext
-        env:
-           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         uses: actions/checkout@v2
         with:
           repository: ccoffman-ebsco/TestingExtraBranchStuff-Next
           ref: main
+          token: ${{ secrets.API_TOKEN_GITHUB }}
           path: next
       - run: |
           cd next
