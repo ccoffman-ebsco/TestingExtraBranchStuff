@@ -38,5 +38,5 @@ jobs:
           git checkout -b ${{ env.branchName }}
           cp -fr ../main/* ./
           git add -A
-          git commit -a
+          git commit -a -m 'This is a message'
           git push --set-upstream origin ${{ env.branchName }}
