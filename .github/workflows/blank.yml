@@ -32,4 +32,9 @@ jobs:
       - run: |
           cd next
           git checkout -b ${{ env.branchName }}
+          cp -fr ../main/src* ./src
+          cp -fr ../main/deploymentConfig ./
+          cp -fr ../main/.gitignore ./
+          git add -A
+          git commit -a
           git push --set-upstream origin ${{ env.branchName }}
