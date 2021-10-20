@@ -22,16 +22,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: main
-      - name: debugging
-        run: |
-          git config --list
       - name: Checkout Enext
         uses: actions/checkout@v2
         with:
           repository: ccoffman-ebsco/TestingExtraBranchStuff-Next
           ref: main
           token: ${{ secrets.API_TOKEN_GITHUB }}
-          persist-credentials: false
           path: next
       - name: Copy repos
         run: |
